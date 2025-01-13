@@ -1,0 +1,309 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <style>
+        /* Styles for the Know button */
+        .know-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        /* Styles for the modal */
+        .modal {
+            display: none; /* Initially hidden */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            width: 80%;
+            max-width: 400px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            background-image: url("{% static 'css/sonu.jpg' %}"); /* Background image */
+            background-size: cover; /* Ensure the image covers the entire box */
+            background-position: center; /* Center the image */
+            background-repeat: no-repeat;
+        }
+
+        .close-btn {
+            background-color:rgb(17, 16, 16);
+            color: black;
+            border: none;
+            padding: 5px 10px;
+            margin-top: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            background-image: url("{% static 'css/spoof.jpg' %}"); /* Background image */
+            background-size: cover; /* Ensure the image covers the entire box */
+            background-position: center; /* Center the image */
+            background-repeat: no-repeat;
+        }
+        .no-resumes-box {
+            background-color: rgba(255, 255, 255, 0.8);  /* White background with transparency */
+            backdrop-filter: blur(8px); /* Blur effect to see background through the box */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Shadow effect */
+            padding: 20px; /* Padding inside the box */
+            border-radius: 8px; /* Rounded corners */
+            text-align: center; /* Center-align the text */
+            max-width: 400px; /* Set a maximum width */
+            margin: 20px auto; /* Center the box horizontally and add vertical margin */
+            font-family: Arial, sans-serif; /* Optional font styling */
+            font-size: 16px; /* Adjust font size */
+            line-height: 1.5;
+            background-image: url("{% static 'css/sonu.jpg' %}"); /* Background image */
+            background-size: cover; /* Ensure the image covers the entire box */
+            background-position: center; /* Center the image */
+            background-repeat: no-repeat; /* Better line spacing */
+            /* No need for animation, as you want the transparency effect to stay */
+        }
+        
+        .no-resumes-box a {
+            color: #007bff; /* Link color */
+            text-decoration: none; /* Remove underline from links */
+            font-weight: bold; /* Make the link text bold */
+        }
+        
+        .no-resumes-box a:hover {
+            text-decoration: underline; /* Underline on hover */
+        }
+        
+        .no-resumes-box {
+            background-color: rgba(255, 255, 255, 0.8); /* White background with transparency */
+            backdrop-filter: blur(8px); /* Blur effect to see background through the box */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Shadow effect */
+            padding: 20px; /* Padding inside the box */
+            border-radius: 8px; /* Rounded corners */
+            text-align: center; /* Center-align the text */
+            max-width: 400px; /* Set a maximum width */
+            margin: 20px auto; /* Center the box horizontally and add vertical margin */
+            font-family: Arial, sans-serif; /* Optional font styling */
+            font-size: 16px; /* Adjust font size */
+            line-height: 1.5; /* Better line spacing */
+            animation: fadeIn 2s ease-in-out; /* Add animation to fade in the box */
+        }
+        
+        /* Animation for fade-in effect */
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .no-resumes-box a {
+            color: #007bff; /* Link color */
+            text-decoration: none; /* Remove underline from links */
+            font-weight: bold; /* Make the link text bold */
+        }
+        
+        .no-resumes-box a:hover {
+            text-decoration: underline; /* Underline on hover */
+        }
+        
+        
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Know button -->
+        <button class="know-button" onclick="openModal()">Know</button>
+
+        <!-- Modal -->
+        <div id="infoModal" class="modal">
+            <div class="modal-content">
+                <p>You can create your resume here. Later you can edit, update, and delete your resumes.
+                    You can also use well defined templates given below. Pay for it. </p>
+                <button class="close-btn" onclick="closeModal()">Close</button>
+            </div>
+        </div>
+
+        <div class="welcome-message">
+            <h2>Welcome {{ user.username }}</h2>
+        </div>
+        
+        <div class="your-resumes">
+            <h3>Your Resumes</h3>
+        </div>
+        
+        <div class="resume-list">
+            {% if resumes %}
+                <ul>
+                    {% for resume in resumes %}
+                        <li>
+                            <strong>{{ resume.full_name }}</strong><br>
+                            <!-- Linking to the view resume page -->
+                            <a href="{% url 'view_resume' resume_id=resume.id %}">View Resume</a><br>
+                            
+                            <!-- Linking to the update resume page -->
+                            <a href="{% url 'update_resume' resume_id=resume.id %}">Edit Resume</a><br>
+                            
+                            <!-- Linking to the delete resume page -->
+                            <a href="{% url 'delete_resume' resume_id=resume.id %}">Delete Resume</a><br><br>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+            <div class="no-resumes-box">
+                <p>No resumes found. <a href="{% url 'create_resume' %}">Create a new resume</a></p>
+            </div>
+            {% endif %}
+        </div>
+
+        <!-- Add new resume link -->
+        <div class="action-buttons">
+            <a href="{% url 'create_resume' %}" class="action-button">Add New Resume</a><br>
+            
+            <!-- Logout link -->
+            <a id="logoutbtn" href="{% url 'login' %}" class="action-button">Logout</a>
+        </div>
+
+        <!-- Resume Templates Section -->
+<div class="template-section">
+    <h3>Select a Template</h3>
+    <div class="templates">
+        <!-- Template 1 -->
+        <div class="template" onclick="showTemplateMessage(1)">
+            <img src="{% static 'css/temp4.jpg' %}" alt="Template 1" class="template-image">
+            <p>Template 1</p>
+        </div>
+        <!-- Template 2 -->
+        <div class="template" onclick="showTemplateMessage(2)">
+            <img src="{% static 'css/temp2.png' %}" alt="Template 2" class="template-image">
+            <p>Template 2</p>
+        </div>
+        <!-- Template 3 -->
+        <div class="template" onclick="showTemplateMessage(3)">
+            <img src="{% static 'css/temp5.jpg' %}" alt="Template 3" class="template-image">
+            <p>Template 3</p>
+        </div>
+        <!-- Template 4 -->
+        <div class="template" onclick="showTemplateMessage(4)">
+            <img src="{% static 'css/temp3.png' %}" alt="Template 4" class="template-image">
+            <p>Template 4</p>
+        </div>
+        <!-- Template 5 -->
+        <div class="template" onclick="showTemplateMessage(5)">
+            <img src="{% static 'css/temp1.png' %}" alt="Template 5" class="template-image">
+            <p>Template 5</p>
+        </div>
+    </div>
+
+    <!-- Message for Payment -->
+    <div id="paymentMessage" class="payment-message" style="display:none;">
+        <p>For attaining this template, pay 500 RS.</p>
+        <button onclick="payNow()" class="pay-button">Pay Now</button>
+    </div>
+</div>
+
+<!-- Add CSS for Templates -->
+<style>
+    .template-section {
+        text-align: center;
+        margin-top: 40px;
+    }
+
+    .templates {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+    }
+
+    .template {
+        cursor: pointer;
+        transition: transform 0.2s ease-in-out;
+    }
+
+    .template:hover {
+        transform: scale(1.1);
+    }
+
+    .template-image {
+        width: 150px;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 8px;
+    }
+
+    .payment-message {
+        margin-top: 20px;
+        background-color: rgba(0, 0, 0, 0.8);
+        color: white;
+        padding: 20px;
+        border-radius: 10px;
+        display: inline-block;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    }
+
+    .pay-button {
+        background-color: #28a745;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        font-size: 16px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .pay-button:hover {
+        background-color: #218838;
+    }
+</style>
+
+<!-- Add JavaScript to handle the image click and show the payment message -->
+<script>
+    function showTemplateMessage(templateId) {
+        // Show the payment message when any template is clicked
+        document.getElementById("paymentMessage").style.display = 'block';
+    }
+
+    function payNow() {
+        alert("Proceeding to payment... (Integrate payment gateway here)");
+    }
+</script>
+
+
+    </div>
+
+    <script src="{% static 'js/home.js' %}"></script>
+    <script>
+        // Function to open the modal
+        function openModal() {
+            document.getElementById('infoModal').style.display = 'flex';
+        }
+
+        // Function to close the modal
+        function closeModal() {
+            document.getElementById('infoModal').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
+
+

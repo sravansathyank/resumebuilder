@@ -1,0 +1,158 @@
+<!-- resumeapp/templates/view_resume.html -->
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Resume</title>
+    <style>
+        /* Inline CSS */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+
+        .resume-container {
+            width: 60%;
+            margin: 40px auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            color: #2c3e50;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            color: #7f8c8d;
+        }
+
+        hr {
+            border: none;
+            height: 2px;
+            background: #ecf0f1;
+            margin: 20px 0;
+        }
+
+        .section {
+            margin-bottom: 20px;
+        }
+
+        .section h2 {
+            font-size: 1.5rem;
+            color: #3498db;
+            margin-bottom: 10px;
+            border-bottom: 2px solid #ecf0f1;
+            padding-bottom: 5px;
+        }
+
+        .section p {
+            font-size: 1rem;
+            color: #2c3e50;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        .back-button-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .back-btn {
+            display: inline-block;
+            text-decoration: none;
+            padding: 10px 20px;
+            color: #fff;
+            background-color: #3498db;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background-color: #2980b9;
+        }
+
+        /* Download button style */
+        .download-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: #2ecc71;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        .download-btn:hover {
+            background-color: #27ae60;
+        }
+    </style>
+</head>
+<body>
+    <div class="resume-container">
+        <!-- Download Button -->
+        <a href="{% url 'download_resume_pdf' resume.id %}" class="download-btn">Download PDF</a>
+
+        <div class="header">
+            <h1>{{ resume.full_name }}</h1>
+            <p><em>{{ resume.objective }}</em></p>
+        </div>
+        <hr>
+        <div class="section">
+            <h2>Skills</h2>
+            <p>{{ resume.skills }}</p>
+        </div>
+        <div class="section">
+            <h2>Experience</h2>
+            <p>{{ resume.experience }}</p>
+        </div>
+        <div class="section">
+            <h2>Education</h2>
+            <p>{{ resume.education }}</p>
+        </div>
+        <div class="section">
+            <h2>Projects</h2>
+            <p>{{ resume.projects }}</p>
+        </div>
+        <div class="section">
+            <h2>Extracurricular Activities</h2>
+            <p>{{ resume.extracurricular_activities }}</p>
+        </div>
+        <div class="back-button-container">
+            <a href="{% url 'home' %}" class="back-btn">Back to Home</a>
+        </div>
+    </div>
+
+    <script>
+        // Inline JS for smooth scrolling to top when clicking back button
+        document.addEventListener("DOMContentLoaded", () => {
+            const backButton = document.querySelector('.back-btn');
+            backButton.addEventListener('click', (event) => {
+                event.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                setTimeout(() => {
+                    window.location.href = backButton.getAttribute('href');
+                }, 600);
+            });
+        });
+    </script>
+</body>
+</html>

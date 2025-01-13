@@ -1,0 +1,30 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Update Resume</title>
+    <link rel="stylesheet" href="{% static 'css/update_resume.css' %}">
+</head>
+<body>
+    <h2>Update Resume: {{ resume.full_name }}</h2>
+
+    {% if msg %}
+        <p>{{ msg }}</p>
+    {% else %}
+        <form method="post">
+            {% csrf_token %}
+            <table>
+            {{ form.as_table }}
+            </table>
+            <button type="submit">Update Resume</button>
+            
+        </form>
+    {% endif %}
+
+    <a href="{% url 'home' %}" class="back-btn">Back to Home</a>
+
+    <script src="{% static 'js/update_resume.js' %}"></script>
+
+</body>
+</html>

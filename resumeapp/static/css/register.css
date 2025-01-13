@@ -1,0 +1,67 @@
+/* register.css */
+
+/* Set background image for the page */
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  padding: 20px;
+  background-image: url('him.jpg'); /* Path to background image */
+  background-size: cover;  /* Ensure it covers the entire page */
+  background-position: center; /* Center the image */
+  background-attachment: fixed; /* Keep the background fixed when scrolling */
+  color: white; /* Make text white to stand out on the background */
+}
+
+/* Heading style */
+h2 {
+  margin-bottom: 20px;
+  color: white; /* White text for better visibility */
+}
+
+/* Form styling */
+form {
+  max-width: 400px;
+  margin: 0 auto;
+  background-color: rgba(0, 0, 0, 0.5); /* Dark transparent background for form */
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Label styling */
+label {
+  display: block;
+  margin-bottom: 5px;
+  color: white; /* White text for labels */
+}
+
+/* Input fields styling */
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Submit button styling */
+input[type="submit"] {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type="submit"]:hover {
+  background-color: #3e8e41;
+}
+
+/* Error message styling */
+.error {
+  color: red;
+  margin-top: 10px;
+}

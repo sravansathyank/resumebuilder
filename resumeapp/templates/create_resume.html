@@ -1,0 +1,22 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Resume</title>
+    <link rel="stylesheet" href="{% static 'css/create_resume.css' %}">
+</head>
+<body>
+    <h2>Create Resume</h2>
+    <form method="post">
+        {% csrf_token %}
+        <table>
+        {{ form.as_table }}
+        </table>
+        <p></p>
+        <button type="submit">Create Resume</button>
+    </form>
+    <a href="{% url 'home' %}" class="back-btn">Back to Home</a>
+
+    <script src="{% static 'js/create_resume.js' %}"></script>
+</body>
+</html>

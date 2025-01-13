@@ -1,0 +1,20 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Delete Resume</title>
+    <link rel="stylesheet" href="{% static 'css/delete_resume.css' %}">
+</head>
+<body>
+    <h2>Are you sure you want to delete the resume of {{ resume.full_name }}?</h2>
+
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Yes, Delete Resume</button>
+    </form>
+
+    <a href="{% url 'home' %}" class="back-btn">Back to Home</a>
+
+    <script src="{% static 'js/delete_resume.js' %}"></script>
+</body>
+</html>

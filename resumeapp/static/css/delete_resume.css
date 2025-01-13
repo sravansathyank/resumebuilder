@@ -1,0 +1,46 @@
+/* delete_resume.css */
+
+/* Overall Page Styling */
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #f0f0f0;
+    padding: 20px;
+}
+
+/* Heading Styling */
+h2 {
+    color: #333;
+}
+
+/* Form and Button Styling */
+form {
+    display: inline-block;
+}
+
+button[type="submit"] {
+    background-color: #f44336;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button[type="submit"]:hover {
+    background-color: #d32f2f;
+}
+
+/* Back Button Styling */
+.back-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+}
+
+.back-btn:hover {
+    background-color: #3e8e41;
+}

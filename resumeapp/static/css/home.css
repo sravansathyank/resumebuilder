@@ -1,0 +1,93 @@
+/* General Styles */
+body {
+  font-family: 'Roboto', Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f8f9fa;
+  background-image: url('pop1.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  color: #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  transition: background-color 0.3s ease;
+}
+
+.container {
+  text-align: center; /* Centering all text */
+}
+
+.welcome-message h2 {
+  font-size: 2.5em;
+  margin-bottom: 20px;
+  color: white; /* White font color */
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  animation: fadeIn 2s ease-in-out;
+}
+
+/* Styling for "Your Resumes" */
+.your-resumes h3 {
+  font-size: 2em;
+  margin-top: 20px;
+  color: white; /* White font color */
+  font-weight: bold;
+}
+
+/* Resume list */
+.resume-list ul {
+  list-style-type: none;
+  color: white;
+  padding: 0;
+}
+
+.resume-list li {
+  margin: 15px 0;
+  color: white; /* White font color for resume list */
+}
+
+/* Styling for the action buttons */
+.action-buttons {
+  margin-top: 30px;
+}
+
+.action-button {
+  background-color: #007bff;
+  color: rgb(11, 11, 11);
+  background-image: url("spoof.jpg'"); /* Background image */
+  background-size: cover; /* Ensure the image covers the entire box */
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat;
+  padding: 12px 30px;
+  text-decoration: none;
+  border-radius: 5px;
+  margin: 10px 0;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  border: 2px solid #007bff;
+  font-size: 1.2em;
+  display: inline-block;
+}
+
+.action-button:hover {
+  background-color: #0056b3;
+  transform: translateY(-3px);
+}
+
+.action-button:active {
+  transform: translateY(2px);
+}
+
+/* Fade-in animation for welcome message */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
